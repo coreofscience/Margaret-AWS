@@ -1,0 +1,14 @@
+name: Shiny
+title: Shiny
+username:
+account: stm6tz-camilo-garcia0saldarriaga
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6804511
+bundleId: 6214785
+url: https://stm6tz-camilo-garcia0saldarriaga.shinyapps.io/Shiny/
+when: 1660841664.29564
+lastSyncTime: 1660841664.29564
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|Upload/import_data.R

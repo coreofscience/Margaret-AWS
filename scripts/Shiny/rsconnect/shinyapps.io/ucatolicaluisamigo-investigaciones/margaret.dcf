@@ -1,0 +1,14 @@
+name: margaret
+title: margaret
+username:
+account: ucatolicaluisamigo-investigaciones
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4824006
+bundleId: 5159177
+url: https://ucatolicaluisamigo-investigaciones.shinyapps.io/margaret/
+when: 1634746984.64081
+lastSyncTime: 1634746984.64081
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData

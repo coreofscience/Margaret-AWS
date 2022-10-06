@@ -1,0 +1,14 @@
+name: ShinyPrueba
+title: ShinyPrueba
+username:
+account: proyecto-margaret
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6800740
+bundleId: 6214010
+url: https://proyecto-margaret.shinyapps.io/ShinyPrueba/
+when: 1660828239.69055
+lastSyncTime: 1660828239.69055
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|Upload/import_data.R
