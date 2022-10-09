@@ -1,20 +1,18 @@
 library(mongolite)
 
 options(mongodb = list(
-  "host" = "localhost",
+  "host" = "localhost:27017",
   #"username" = "myuser",
   #"password" = "mypassword"
 ))
 databaseName <- "MargaretDB"
-collectionName <- "margaret"
+#collectionName <- "margaret"
 
 saveData <- function(data, collectionName) {
   #Conexión a la base de datos
   db <- mongo(collection = collectionName,
               url = sprintf(
                 "mongodb+srv://%s:%s@%s/%s",
-                options()$mongodb$username,
-                options()$mongodb$password,
                 options()$mongodb$host,
                 databaseName
               ),
