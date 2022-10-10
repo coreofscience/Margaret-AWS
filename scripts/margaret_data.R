@@ -57,8 +57,24 @@ shiny_data <- data_analysis_descriptive_ucla(produccion_actualizada)
 
 shiny_data[[3]] <- researcher_information_ucla(shiny_data)
 shiny_data[[3]] <- getting_orcid(shiny_data)
-#Se sube la información a la BD
+#Data is uploaded to the BD
+source(here("scripts",
+            "database.R"))
 
+grupo_general <- as.data.frame(shiny_data[[1]])
+investigadores_general <- as.data.frame(shiny_data[[3]])
+
+saveData(grupo_general, "grupo_general")
+saveData(investigadores_general, "investigadores_general")
+
+collectionName <- list("trabajos_dirigidos","eventos_cientificos","articulos","proyectos","capitulos","jurado","cursos","otros_articulos","consultorias","libros","participacion_comites","demas_trabajos","informes_investigacion","innovaciones_gestion","generacion_multimedia","otra_publicacion_divulgativa","documentos_trabajo","ediciones","estrategias_pedagogicas","redes_conocimiento","generacion_contenido_virtual","espacios_participacion","softwares","innovaciones_procesos","otros_libros","estrategias_comunicacion","generacion_contenido_impreso","informes_tecnicos","participacion_ciudadana_cti","regulaciones_normas","actividades_evaluador","actividades_formacion","apropiacion_social_conocimiento","produccion_tecnica_tecnologica","generacion_contenido_audio","conceptos_tecnicos","reglamentos_tecnicos","otros_productos_tecnologicos","traducciones","signos_distintivos","nuevos_registros_cientificos","notas_cientificas","Producciones_de_contenido_digital","libros_divulgacion","libros_formacion","Producciones_digital_audiovisual","manuales_guias_especializadas","divulgacion_publica_contenidos_trasmedia","grupo_researcher_cleaned")
+
+for(j in length(shiny_data[[2]])){
+  
+  data <- as.data.frame(shiny_data[[2]][[j]])
+  saveData(data, collectionName[[j]])
+  
+}
 #export_csv(shiny_data)
 
 # Current Journals categories for flex_dashboard
