@@ -48,3 +48,5 @@ rsconnect/
 
 #Upload files
 Upload/
+data/
+notebooks/
