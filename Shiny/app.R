@@ -9,9 +9,11 @@ library(readxl)
 library(stringi)
 library(shinydashboard)
 library(writexl)
+library(here)
 
-# source(here("Upload",
-#             "import_data.R"))
+source(here("Shiny",
+            "load_data.R"))
+
 # library(tidyverse)
 # library(here)
 # library(stringi)
@@ -20,249 +22,207 @@ library(writexl)
 # source(here("scripts",
 #             "citations.R"))
 
-articulos_unicos_2016_2020 <- 
-  read_csv(here("output",
-                "articulos.csv")) |>
+articulos <- 
+  loadData("articulos")
+
+articulos_unicos_2016_2020 <- articulos |> 
   mutate(SJR_Q = ifelse(SJR_Q == '-', "Sin categoria",
                         SJR_Q))
 
-articulos_2016_2020 <- 
-  read_csv(here("output",
-                "articulos.csv")) |> 
+articulos_2016_2020 <- articulos |> 
   mutate(categoria_revista = ifelse(categoria_revista == "Sin categorÃ­a",
                                     "Sin Categoría", ifelse(categoria_revista == "Sin informaciÃ³n", 'Sin Información', categoria_revista)),
          SJR_Q = ifelse(SJR_Q == "Sin categorÃ­a",
                         "Sin Categoría", ifelse(SJR_Q == "Sin informaciÃ³n", 'Sin Información', SJR_Q)))
 
 investigadores_general <- 
-  read_csv(here("output",
-                "investigadores.csv")) |> 
+  loadData("investigadores_general")
+
+investigadores_general <- investigadores_general|> 
   filter(!is.na(grupo))
 
 grupos_general <- 
-  read_csv(here("output",
-                "grupos_general.csv")) 
+  loadData("grupo_general") 
 
 paises_general <- articulos_unicos_2016_2020 |> 
   count(pais_revista, sort = TRUE)
 paises_general$porcentaje <- round(prop.table(paises_general$n),3)*100 
 
+#Revistas
 revistas_actuales <-
-  read_csv(here("output", 
+  read_csv(here("data", 
                 "current_journals.csv")) 
 
-
 capitulos_2016_2020 <- 
-  read_csv(here("output",
-                "capitulos.csv")) 
+  loadData("capitulos")
 
 libros_2016_2020 <- 
-  read_csv(here("output",
-                "libros.csv")) 
+  loadData("libros")
 
 software_2016_2020 <- 
-  read_csv(here("output",
-                "softwares.csv")) 
+  loadData("softwares") 
 
 trabajo_2016_2020 <- 
-  read_csv(here("output",
-                "trabajos_dirigidos.csv")) 
+  loadData("trabajos_dirigidos") 
 
 innovacion_2016_2020 <- 
-  read_csv(here("output",
-                "innovaciones_gestion.csv"))
+  loadData("innovaciones_gestion")
 
 actividades_evaluador <-
-  read_csv(here("output",
-                "actividades_evaluador.csv"))
+  loadData("actividades_evaluador")
 
 actividades_formacion <-
-  read_csv(here("output",
-                "actividades_formacion.csv"))
+  loadData("actividades_formacion")
 
 apropiacion_social <-
-  read_csv(here("output",
-                "apropiacion_social_conocimiento.csv"))
+  loadData("apropiacion_social_conocimiento")
 
+#No DB
 conceptos_tecnicos <-
   read_csv(here("output",
                 "conceptos_tecnicos.csv"))
 
 consultorias <-
-  read_csv(here("output",
-                "consultorias.csv"))
+  loadData("consultorias")
 
 cursos <-
-  read_csv(here("output",
-                "cursos.csv"))
+  loadData("cursos")
 
 demas_trabajos <-
-  read_csv(here("output",
-                "demas_trabajos.csv"))
-#investigadores
+  loadData("demas_trabajos")
+
+#investigadores #NO DB
 df_researchers <-
-  read.csv(here("output",
+  read.csv(here("data",
                 "df_researcher.csv"))
 
 divulgacion_publica_contenidos_transmedia <-
-  read_csv(here("output",
-                "divulgacion_publica_contenidos_transmedia.csv"))
+  loadData("divulgacion_publica_contenidos_transmedia")
 
 documentos_trabajo <-
-  read_csv(here("output",
-                "documentos_trabajo.csv"))
+  loadData("documentos_trabajo")
 
 ediciones <- 
-  read_csv(here("output",
-                "ediciones.csv"))
-
+  loadData("ediciones")
+ 
+#NO DB
 Eliminados_por_grupo <-
-  read_csv(here("output",
-                "Eliminados_por_grupo.csv"))
+  loadData("Eliminados_por_grupo")
 
 espacios_participacion <-
-  read_csv(here("output",
-                "espacios_participacion.csv"))
+  loadData("espacios_participacion")
 
 estrategias_comunicacion <- 
-  read_csv(here("output",
-                "estrategias_comunicacion.csv"))
+  loadData("estrategias_comunicacion")
 
 estrategias_pedagogicas <-
-  read_csv(here("output",
-                "estrategias_pedagogicas.csv"))
+  loadData("estrategias_pedagogicas")
 
 eventos_cientificos <-
-  read_csv(here("output",
-                "eventos_cientificos.csv"))
+  loadData("eventos_cientificos")
 
 generacion_contenido_audio <-
-  read_csv(here("output",
-                "generacion_contenido_audio.csv"))
+  loadData("generacion_contenido_audio")
 
 generacion_contenido_impreso <-
-  read_csv(here("output",
-                "generacion_contenido_impreso.csv"))
+  loadData("generacion_contenido_impreso")
 
 generacion_contenido_virtual <-
-  read_csv(here("output",
-                "generacion_contenido_virtual.csv"))
+  loadData("generacion_contenido_virtual")
 
 generacion_multimedia <-
-  read_csv(here("output",
-                "generacion_multimedia.csv"))
+  loadData("generacion_multimedia")
 
 informes_investigacion <-
-  read_csv(here("output",
-                "informes_investigacion.csv"))
+  loadData("informes_investigacion")
 
 informes_tecnicos <-
-  read_csv(here("output",
-                "informes_tecnicos.csv"))
+  loadData("informes_tecnicos")
 
 innovaciones_gestion <-
-  read_csv(here("output",
-                "innovaciones_gestion.csv"))
+  loadData("innovaciones_gestion")
 
 innovaciones_procesos <-
-  read_csv(here("output",
-                "innovaciones_procesos.csv"))
+  loadData("innovaciones_procesos")
 
+#Revista
 international_journals_2021 <-
-  read_csv(here("output",
+  read_csv(here("data",
                 "international_journals_2021.csv"))
 
 journals_2016_2020 <-
-  read_csv(here("output",
+  read_csv(here("data",
                 "journals_2016_2020.csv"))
 
 journals_international_2016_2020 <-
-  read_csv(here("output",
+  read_csv(here("data",
                 "journals_international_2016_2020.csv"))
+#Fin de revistas
 
 jurado <-
-  read_csv(here("output",
-                "jurado.csv"))
+  loadData("jurado")
 
 libros_divulgacion <-
-  read_csv(here("output",
-                "libros_divulgacion.csv"))
+  loadData("libros_divulgacion")
 
 libros_formacion <-
-  read_csv(here("output",
-                "libros_formacion.csv"))
+  loadData("libros_formacion")
 
 manuales_guias_especializadas <-
-  read_csv(here("output",
-                "manuales_guias_especializadas.csv"))
+  loadData("manuales_guias_especializadas")
 
 notas_cientificas <-
-  read_csv(here("output",
-                "notas_cientificas.csv"))
+  loadData("notas_cientificas")
 
 nuevos_registros_cientificos <-
-  read_csv(here("output",
-                "nuevos_registros_cientificos.csv"))
+  loadData("nuevos_registros_cientificos")
 
 otra_publicacion_divulgativa <- 
-  read_csv(here("output",
-                "otra_publicacion_divulgativa.csv"))
+  loadData("otra_publicacion_divulgativa")
 
 otros_articulos <-
-  read_csv(here("output",
-                "otros_articulos.csv"))
+  loadData("otros_articulos")
 
 otros_libros <-
-  read_csv(here("output",
-                "otros_libros.csv"))
+  loadData("otros_libros")
 
 otros_productos_tencologicos <-
-  read_csv(here("output",
-                "otros_productos_tencologicos.csv"))
+  loadData("otros_productos_tencologicos")
 
 participacion_ciudadana_cti <-
-  read_csv(here("output",
-                "participacion_ciudadana_cti.csv"))
+  loadData("participacion_ciudadana_cti")
 
 participacion_comites <-
-  read_csv(here("output",
-                "participacion_comites.csv"))
+  loadData("participacion_comites")
 
 produccion_tecnica_tecnologica <-
-  read_csv(here("output",
-                "produccion_tecnica_tecnologica.csv"))
+  loadData("produccion_tecnica_tecnologica")
 
 Producciones_de_contenido_digital <-
-  read_csv(here("output",
-                "Producciones_de_contenido_digital.csv"))
+  loadData("Producciones_de_contenido_digital")
 
 producciones_digital_audiovisual <-
-  read_csv(here("output",
-                "Producciones_digital_audiovisual.csv"))
+  loadData("Producciones_digital_audiovisual")
 
 redes_conocimiento <-
-  read_csv(here("output",
-                "redes_conocimiento.csv"))
+  loadData("redes_conocimiento")
 
 reglamentos_tecnicos <-
-  read_csv(here("output",
-                "reglamentos_tecnicos.csv"))
+  loadData("reglamentos_tecnicos")
 
 regulaciones_normas <-
-  read_csv(here("output",
-                "regulaciones_normas.csv"))
+  loadData("regulaciones_normas")
 
 signos_distintivos <-
-  read_csv(here("output",
-                "signos_distintivos.csv"))
+  loadData("signos_distintivos")
 
+#NO DB
 similares_entre_grupo <-
   read_csv(here("output",
                 "Similares_entre_grupo.csv"))
 
 traducciones <-
-  read_csv(here("output",
-                "traducciones.csv"))
+  loadData("traducciones")
 
 ## Historico categorias grupos
 grupos_historicos <- read_csv("https://docs.google.com/spreadsheets/d/1mAFeuE-Eq6DTSiB6a04uo7jid_LcXt1m/export?format=csv&gid=551509450")
