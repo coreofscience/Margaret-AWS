@@ -77,11 +77,6 @@ actividades_formacion <-
 apropiacion_social <-
   loadData("apropiacion_social_conocimiento")
 
-#No DB
-conceptos_tecnicos <-
-  read_csv(here("output",
-                "conceptos_tecnicos.csv"))
-
 consultorias <-
   loadData("consultorias")
 
@@ -91,11 +86,6 @@ cursos <-
 demas_trabajos <-
   loadData("demas_trabajos")
 
-#investigadores #NO DB
-df_researchers <-
-  read.csv(here("data",
-                "df_researcher.csv"))
-
 divulgacion_publica_contenidos_transmedia <-
   loadData("divulgacion_publica_contenidos_transmedia")
 
@@ -104,10 +94,6 @@ documentos_trabajo <-
 
 ediciones <- 
   loadData("ediciones")
- 
-#NO DB
-Eliminados_por_grupo <-
-  loadData("Eliminados_por_grupo")
 
 espacios_participacion <-
   loadData("espacios_participacion")
@@ -216,11 +202,6 @@ regulaciones_normas <-
 signos_distintivos <-
   loadData("signos_distintivos")
 
-#NO DB
-similares_entre_grupo <-
-  read_csv(here("output",
-                "Similares_entre_grupo.csv"))
-
 traducciones <-
   loadData("traducciones")
 
@@ -296,7 +277,7 @@ eva_docentes <- read_csv("https://docs.google.com/spreadsheets/d/14EGepMiiewyb2P
 margaret <- list("grupos_general"=grupos_general,"investigadores"=investigadores_general,"articulos"=articulos_unicos_2016_2020,
                  "actividades_evaluador"=actividades_evaluador,"actividades_formacion"=actividades_formacion,
                  "apropiacion_social_conocimiento"=apropiacion_social,
-                 "capitulos"=capitulos_2016_2020,"conceptos_tecnicos"=conceptos_tecnicos,"consultorias"=consultorias,
+                 "capitulos"=capitulos_2016_2020 ,"consultorias"=consultorias,
                  "cursos"=cursos,"demas_trabajos"=demas_trabajos,
                  "divulgacion_publica_contenidos_transmedia"=divulgacion_publica_contenidos_transmedia,
                  "documentos_trabajo"=documentos_trabajo,"ediciones"=ediciones,
@@ -314,8 +295,7 @@ margaret <- list("grupos_general"=grupos_general,"investigadores"=investigadores
                  "produccion_tecnica_tecnologia"=produccion_tecnica_tecnologica,"producciones_de_contenido_digital"=Producciones_de_contenido_digital,
                  "producciones_digital_audiovisual"=producciones_digital_audiovisual,"redes_conocimiento"=redes_conocimiento,
                  "reglamentos_tecnicos"=reglamentos_tecnicos,"regulaciones_normas"=regulaciones_normas,"signos_distintivos"=signos_distintivos,
-                 "software"=software_2016_2020,"trabajos_dirigidos"=trabajo_2016_2020,"traducciones"=traducciones,
-                 "similares_entre_grupo"=similares_entre_grupo,"eliminados_por_grupo"=Eliminados_por_grupo)
+                 "software"=software_2016_2020,"trabajos_dirigidos"=trabajo_2016_2020,"traducciones"=traducciones)
 #-----------------------------------------------------------------------------------------------------#
 #dataframe filtros
 #filtro grupo
@@ -520,10 +500,10 @@ server <- function(input, output) {
   
   output$ex1 <- DT::renderDataTable(server = FALSE,{
     grupos_general <- grupos_general |> 
-      select(grupo, clasificacion, sum_papers, departamento , url.x,
+      select(grupo, clasificacion, sum_papers, departamento , url_x,
              fecha_creacion,lider, email, area_conocimiento_1) |> 
-      mutate(url.x= str_c('<a href="',
-                        url.x,
+      mutate(url_x= str_c('<a href="',
+                        url_x,
                         '" target="_blank">Link</a>'))
     if (filtro()==FALSE)
     {
@@ -583,9 +563,9 @@ server <- function(input, output) {
                              "https://scholar.google.com/citations?user=",
                              id_scholar,
                              '" target="_blank">Scholar</a>'),
-             ORCID = str_c("<a href=","\"",
+             orcid = str_c("<a href=","\"",
                            "https://orcid.org/",
-                           ORCID,
+                           orcid,
                            '" target="_blank">ORCID</a>')) |>
       select(-vinculacion,
              -fin_vinculacion) |> 
@@ -611,7 +591,7 @@ server <- function(input, output) {
              Formacion,
              Inicio,
              CvLAC,
-             ORCID,
+             orcid,
              scholar) 
     if (filtro()==FALSE)
     {
